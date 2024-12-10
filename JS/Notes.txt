@@ -1,0 +1,10 @@
+1. JavaScript is a dynamically typed language, meaning that the type of a variable is determined at runtime rather than at compile time.
+
+Example - 
+let x = 10; // x is a number
+x = "hello"; // now x is a string
+
+2. null == 0 is false because null is only loosely equal to undefined and not to any other value like 0.
+null >= 0 is true because null is coerced to 0, and the comparison 0 >= 0 evaluates to true.
+
+3. primitive non primitive

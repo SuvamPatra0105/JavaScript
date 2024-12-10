@@ -20,7 +20,7 @@ console.log("1)---------------------------------------");
 let val = "12"
 let numVal = +val
 let numericWord = Number(val)
-console.log(typeof numVal);     //number
+console.log(typeof numVal);          //number
 console.log(typeof numericWord);     //number
 
 console.log("2)---------------------------------------");
@@ -40,7 +40,7 @@ console.log("4)---------------------------------------");
 
 let str = ""
 console.log(+str)              // "abc" => NaN, "" => 0
-console.log(Boolean(str))       // "abc" => true, "" => false
+console.log(Boolean(str))      // "abc" => true, "" => false
 console.log(typeof +str)       // number
 
 console.log("5)---------------------------------------");
@@ -56,10 +56,9 @@ console.log(+undefObj)               //NaN
 console.log(typeof +undefObj)        //number
 
 console.log("7)---------------------------------------");
-console.log("Type Coercion")
 
-let a = "10" + 1            // 101, type => string
-let b = "10" - 1            //  9, type => number
+let a = "10" + 1                    // 101, type => string
+let b = "10" - 1                    //  9, type => number
 
 console.log("10" + 1)               // 101
 console.log(10 + "1")               // 101
@@ -68,6 +67,27 @@ console.log("10" + 1 + 4)           // 1014
 console.log(10 + 1 + "4")           // 114
 console.log("10" - 1)               // 9
 console.log("10" > 1)               // true since "10" is converted to number
-console.log("10" != 1)               // true
-console.log("10" == 10)               // true
-console.log("10" === 10)               // false since datatypes are different
+console.log("10" != 1)              // true
+console.log("10" == 10)             // true
+console.log("10" === 10)            // false since datatypes are different
+
+console.log("8)---------------------------------------");
+
+console.log(null > 0)           // false
+console.log(null < 0)           // false
+console.log(null == 0)          // false though +null = 0
+console.log(null === 0)         // false
+console.log(null >= 0)          // true 
+console.log(null <= 0)          // true
+console.log(null != 0)          // true
+console.log(null == undefined)  // true since null is loosely equal to undefined
+
+console.log("9)---------------------------------------");
+
+let symbol1 = Symbol('12')
+let symbol2 = Symbol('12')
+console.log(symbol1 == symbol2)             
+// false because Symbols are unique and immutable values. Even if two symbols are created with the same description (like '12'), they are still considered distinct and not equal to each other
+console.log(symbol1 === symbol2)            // false
+
+console.log(typeof 1234556787464828798209n)     //bigint
