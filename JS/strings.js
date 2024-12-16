@@ -55,9 +55,16 @@ console.log(word.split(' '))         // [ 'Welcome', 'to', 'JS' ]
 console.log(word.split('@'))         
 // [ 'Welcome to JS' ] returns entire string as array if matching char not found
 console.log(word.split(' ').join('-'))         // Welcome-to-JS
+console.log(word.substr(2, 5))                 // lcome.. starting from 2nd index and extracting 5 chars
+console.log(word.substr(2, -5))                // ''
+console.log(word.substr(-2, 1))                // J.. starting from end
+console.log(word.substr(-2, 4))                // JS.. Starting from -2 but will stop at end
+
 
 // let str = "Istanbul";
 // console.log(str.toLocaleLowerCase('tr-TR'));    
 // ıstanbul (Turkish locale)
+
+
 
 
