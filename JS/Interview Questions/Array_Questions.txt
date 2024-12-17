@@ -1,0 +1,58 @@
+1. Differentiate between slice and splice in JS arrays.
+--> 
+Slice: Used to create a shallow copy of a portion of an array (or string) without modifying the original array. Returns a new array containing the extracted elements.
+
+Syntax - slice(startIndex, endIndex?)    // startIndex inclusive, endIndex optional and exclusive
+
+
+Splice: Used to modify an array by adding, removing, or replacing elements. Modifies original array. Returns an array of removed elements.
+
+Syntax - splice(startIndex, deleteCount?, itemsToReplace?)  // deleteCount, itemsToReplace optional and exclusive
+
+
+2. return type of arr.join()
+--> string
+
+
+3. Output of console.log(Array.from({course: 'Java'})) and why?
+-->  Output: [] 
+
+Array.from() is designed to work with iterable objects, such as arrays or array-like objects (objects with a length property and numerical indices)
+
+If you want to convert an object's properties (keys or values) into an array, you can use Object.keys(), Object.values(), or Object.entries().
+
+Object.keys(): Returns an array of the object's keys.
+Object.values(): Returns an array of the object's values.
+Object.entries(): Returns an array of the object's key-value pairs.
+
+Example - 
+Array.from(Object.keys({course: 'Java'}))            // ['course']
+Array.from(Object.values({course: 'Java'}))          // ['Java']
+Array.from(Object.entries({course: 'Java', id: 1}))  // [['course','Java'], ['id',1]]
+
+
+4. Differentiate between Array.from() and Array.of()
+---> 
+Array.from() - Converts array-like or iterable objects into arrays
+Example: Array.from('hello') or Array.from(new Set([a,b,c]))
+Array.of() - Creates a new array from a list of arguments
+Example: Array.of(1, 2, 3)
+
+5. Differentiate between arr.splice() and arr.toSpliced()
+-->
+arr.splice() - modifies original array
+arr.toSpliced() - not modifies original array
+
+Example:
+array = [1, 2, 3, 4, 5]
+console.log(array.toSpliced(2,2))  // [1,2,5]... array excluding removed part
+console.log(array)                 // [1, 2, 3, 4, 5].. unmodified
+console.log(array.splice(2,2))     // [3, 4]... removed part
+console.log(array)                 // [1,2,5].. modified
+
+6. Why [5,20,1].sort() gives output as [1,20,5] and how to correctly sort them?
+--> [5,20,1].sort() converts the elements to strings and then sorts them lexicographically. 
+
+To correctly sort the array(numerically),
+[5, 20, 1].sort((a,b) => a - b)     // ascending order sorting
+[5, 20, 1].sort((a,b) => b - a)     // descending order sorting
