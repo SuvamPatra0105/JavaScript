@@ -21,6 +21,20 @@ console.log(w);     // ReferenceError: Cannot access 'w' before initialization..
 const w = 5
 
 
+x = 5;
+var x;              // declaration hoisted to top
+console.log(x)      // 5.. not undefined
+
+
+var z = 100;
+function names() {
+    console.log(z);         // undefined
+    var z = 10;             // only declaration hoisted to top of func scope, not value
+}
+
+names()
+
+
 /* Function Hoisting */
 
 // Function declaration
