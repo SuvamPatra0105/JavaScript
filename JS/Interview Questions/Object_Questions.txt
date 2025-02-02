@@ -1,0 +1,247 @@
+1. console.log({ name: "GFG" } == { name: "GFG" });  
+console.log({ name: "GFG" } === { name: "GFG" });  
+--> both false because JavaScript compares objects by reference, not by value and each object literal creates a new object in memory, so they do not refer to the same object
+
+(IMPORTANT) 2. const obj1 = {};
+const obj2 = { key: "b" };
+const obj3 = { key: "c" };
+obj1[obj2] = 123;
+obj1[obj3] = 234;
+console.log(obj1[obj2]);    // 234
+// when you use objects 'obj2' and 'obj3' as keys in the object 'obj1', JavaScript automatically converts these objects into strings using the 'toString()' method. Since both 'obj2' and 'obj3' are objects, their default string representation is '"[object Object]"'.
+This means both 'obj1[obj2] = 123' and 'obj1[obj3] = 234' actually assign values to the same key: '"[object Object]"'. As a result, the second assignment ('obj1[obj3] = 234') overwrites the first one.
+
+console.log(obj1) will output as { [object Object]: 234}
+
+
+3. let obj1 = { name: "GFG" };
+let obj2 = [obj1];
+obj1 = null;
+
+console.log(obj2);  // [{ name: "GFG" }] since after obj1 is set to null, obj2 still retains the reference to the original object
+
+// but 
+let obj1 = { name: "GFG" };
+let obj2 = [obj1];
+obj1.name = null;       // modifying property modifies original obj
+console.log(obj2);      // [ { name: null } ]
+
+
+4. const machine = {
+    name: 'abcd'
+}
+function xyz(obj) {
+obj.name = 'gh'
+}
+
+xyz(machine)
+console.log(machine)        // modified.. { name: 'gh' }
+
+// but 
+
+function xyz(obj) {
+    obj = {name: 'gh'}      // reassigning obj, hence original obj will remain unmodified
+    }
+
+xyz(machine)
+console.log(machine) 
+
+5. Difference between Object.freeze() and Object.seal()
+-->
+Object.freeze: Makes an object immutable(freezes it) by preventing adding, deleting, or modifying its properties.
+
+Note: if property itself is an object and not a primitive type, then its values can be modified unless that is also frozen.
+
+Example: 
+
+const obj = { name: 'John', id: { counter: 2} };
+Object.freeze(obj);
+obj.name = 'Jane';      // This will not change the value
+delete obj.name;        // This will not delete the property
+obj.age = 30;           // This will not add a new property
+obj.id.counter = 3;     // This will change the value
+
+Object.freeze(obj.id)
+obj.id.counter = 6;     // This will not change the value now
+
+
+Object.seal: Seals the object by preventing new properties from being added and existing properties from being deleted but unlike Object.freeze, the values of the properties themselves can still be modified.
+
+Example:
+
+const obj = { name: 'John' };
+Object.seal(obj);
+
+obj.name = 'Jane';  // This will change the value
+delete obj.name;    // This will not delete the property
+obj.age = 30;       // This will not add a new property
+
+6. newObj = {
+     name: 'XYZ',
+     msg: function() {
+         console.log(`Hi ${this.name}`)    // this refers to newObj
+     },
+     msg2: () => {
+         console.log(`Hi ${this.name}`)    // this refers to global object 'window' for arrow funcs
+     }
+ }
+
+newObj.msg()        // Hi XYZ
+newObj.msg2()        // Hi undefined
+
+7. How object destructuring is done?
+--> 
+const p = {
+    name: 'abc',
+    id: 2,
+    count: { 
+        increment: true
+        }
+}
+
+const {name, id, count: { increment }} = p;
+
+Note: if another variable exists with same name, it will throw error
+const name = 'Lenovo';      // name already exists
+
+To resolve this:
+const {name: myname, id, count: { increment }} = p;
+// now 'name' property of obj can be accessed using 'myname'
+
+8. const obj = {
+    brand: 'lenovo'
+}
+console.log(obj.brand)  // lenovo
+console.log(obj['brand'])  // lenovo
+console.log(obj[brand])  // undefined
+
+to resolve this:
+const brand = 'brand'
+console.log(obj[brand])  // lenovo
+
+Also,
+const d = 'brand'
+console.log(obj.d)  // undefined since it will search for a 'd' property in obj
+
+9. Copying of Objects
+-->
+const obj2 = obj      // shallow copy, referencing to the same object
+// modifying one obj will affect other
+
+// Deep Copy of Objects
+const obj4 = JSON.parse(JSON.stringify(obj))
+const obj5 = {...obj}
+const obj3 = Object.assign({}, obj)     
+// here {} refers to target obj, if it is Object.assign({price: 10}, obj) then output will contain entire obj copy merged with new 'price' property
+
+10. How do you add dynamic key values in an object?
+--> 
+let dynamicKey = "age";  
+let dynamicValue = 25;  
+
+let user = {};  
+
+// Add dynamic key-value pair to the object
+user[dynamicKey] = dynamicValue;
+
+console.log(user);
+
+11. const obj = {
+    a: 1,
+    b: 2,
+    a: 3,
+}
+console.log(obj);  // Ouput: { a: 3, b: 2 }
+
+12. How to traverse in an object?
+--> using for...in loop
+
+const car = {
+    brand: 'Volvo',
+    price: 600000
+}
+
+for (let a in car) {
+    console.log(a)           // prints keys
+    console.log(car[a])      // prints values
+}
+
+for (let a in Object.keys(car)) {       // or Object.values(obj)/Object.entries(obj)
+    console.log(a)      // prints indices
+}
+
+for (let a of Object.keys(car)) {       // or Object.values(obj)/Object.entries(obj)
+    console.log(a)      // prints keys
+}
+
+
+13. Why `for (let a in car)` gives no error but `for (let a of car)` gives error? Also then why `for (let a of Object.keys(car))` doesn't give error?
+
+--> 
+for...in loop: used to iterate over objects
+for...of loop: used to iterate over iterables like arrays
+since Object.keys(obj)/Object.values(obj)/Object.entries(obj) convert keys/values/key-value pairs into arrays so for..of loop works fine with them
+
+
+14. console.log([..."GFG"])
+--> [ 'G', 'F', 'G' ]
+
+15. const obj = {
+    name: "GFG",
+    level: 4,
+    company: true,
+}
+const res = JSON.stringify(obj, ["name", "level"]);
+console.log(res);   // {"name":"GFG","level":4}
+
+// JSON.stringify() method is used to convert the obj object into a JSON string. The second argument passed to JSON.stringify() is an array of keys (["name", "level"]), which acts as a replacer. This means only the properties specified in the array will be included in the resulting JSON string.
+
+16. const operation = {
+    value: 20,
+    multi() {
+        return this.value * 10;     // this refers to operation obj
+    },
+    divide: () => this.value / 10,  // this refers to window obj, `this.value` is thus undefined
+};
+
+console.log(operation.multi());  // 200
+console.log(operation.divide());  // NaN.. (undefined / 10 gives NaN)
+
+17. function Items(list, ...param, list2) {
+    return [list, ...param, list2];
+}
+Items(["a", "b"], "c", "d");  //  SyntaxError: Rest parameter must be last formal parameter
+
+18. 
+function Items(list, list2, ...param) {
+    return [list, list2, ...param];   // [["a", "b"], "c", "d"]
+}
+Items(["a", "b"], "c", "d");    
+
+function Items(list, list2, ...param) {
+    return [list, list2, param];    // [["a", "b"], "c", ["d"]]
+}
+Items(["a", "b"], "c", "d");
+
+19. What is JSON.stringify() and JSON.parse() and where do we use it?
+-->
+JSON.stringify() is used to serialize/convert JavaScript objects into JSON strings, typically when sending data over a network or storing it. 
+Example: 
+const settings = { theme: "dark", notifications: true };
+localStorage.setItem("userSettings", JSON.stringify(settings));
+
+JSON.parse() is used to deserialize JSON strings back into JavaScript objects, often when receiving data from a server.
+Example:
+const storedSettings = JSON.parse(localStorage.getItem("userSettings"));
+console.log(storedSettings);
+
+20. let obj = { num: 2 };
+const fun = (x = { ...obj }) => {
+    console.log((x.num /= 2));
+}
+
+fun();          // 1 ... due to deep copy, new obj copy is made
+fun();          // 1 ... due to deep copy, new obj copy is made
+fun(obj);       // 1 
+fun(obj);       // 0.5
+// for last two cases as obj is passed directly and objects are passed by reference, hence obj is modified directly, first to { num: 1 } and then to { num: 0.5 }
