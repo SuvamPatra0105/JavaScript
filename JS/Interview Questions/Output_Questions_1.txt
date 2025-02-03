@@ -40,7 +40,7 @@ now true < 8... true is type coerced to 1.. so 1 < 8 -> true
 
 17. "9" > "11" -> true... lexicographically checking
 
-18. "9" > 11 -> false
+18. "9" > 11 -> false... lexicographically checking only if both operands are strings
 
 19. "9" < "a" -> true... lexicographically checking
 
