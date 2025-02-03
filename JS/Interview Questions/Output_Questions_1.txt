@@ -92,6 +92,10 @@ b.id = g.id++;  // no change
 console.log(b)  // { id: 2 }
 console.log(g)  // { id: 2 }
 
+b.id = ++g.id;  // changed
+console.log(b)  // { id: 3 }
+console.log(g)  // { id: 3 }
+
 28. str = 'Hello'
 str[1] = 'A'
 
