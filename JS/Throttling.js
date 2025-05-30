@@ -1,6 +1,6 @@
 Definition: Throttling is a technique used to limit how often a function can be called over time, regardless of how many times an event occurs
 
-Throttling ensures a function is only called once every X milliseconds, even if it is triggered more frequently
+Working: Throttling ensures a function is only called once every X milliseconds, even if it is triggered more frequently
 Useful when you want to rate-limit event handling
 
 Usecases:
