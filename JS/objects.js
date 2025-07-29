@@ -1,5 +1,5 @@
 console.log({ name: "GFG" } == { name: "GFG" });  // false
-console.log({ name: "GFG" } === { name: "GFG" });  // false 
+console.log({ name: "GFG" } === { name: "GFG" });  // false...compared by reference, not by value.. diff memory address
 
 console.log('-----------------------------------------------------------------')
 
@@ -19,25 +19,18 @@ console.log(objs1);      // { brand: 'Volvo' }
 
 console.log('-----------------------------------------------------------------')
 
-const original = {
-    id: 1
+// Destructuring Object
+const obj = {
+name: 'abc',
+id: 2,
+age: 20
 }
-const copied = original      // shallow copy, referencing to the same object
 
-copied['id'] = 2;
-
-console.log(original)    // { id: 2 }.. will modify original obj
-
-// Deep Copy of Objects
-const obj3 = Object.assign({}, original)
-const obj4 = JSON.parse(JSON.stringify(original))
-const obj5 = {...original}
-
-obj3.id = 8;        
-obj4.id = 9;
-obj5.id = 10;
-
-console.log(original)    // unmodified
+const {name, id, age} = obj;
+//or
+const { name: userName, id: userId, age: userAge } = obj;        // custom property names
+//or
+const {name, ...rest} = obj        // rest operator
 
 console.log('-----------------------------------------------------------------')
 
@@ -174,6 +167,7 @@ obj_4 = {id: 2, course: 'Java'}
 
 console.log({obj_3, obj_4})       // { obj3: { id: 1, course: 'JS' }, obj4: { id: 2, course: 'Java' } }
 
+// merging
 console.log({...obj_3, ...obj_4});      // { id: 2, course: 'Java' }
 console.log(Object.assign({}, obj_3, obj_4));   // { id: 2, course: 'Java' }
 
